@@ -10,10 +10,30 @@
 
 <div id="mydiv"></div>
 
+<p style="padding-left: 45px"> -----   ECMAscript 6 Features below ↓ -----   </p>
+
 <p>
   <h2 id="es6Person"></h2>
   <h4 id="es6Employee"></h4>
 </p>
+
+<p>
+  <h2 id="arrowTest"></h2>
+</p>
+
+<text>Regular function: this refences the object that called the function</text>
+<button id="btn">Click Me!</button>
+
+<p><strong>this</strong> represents:</p>
+<p id="demo"></p>
+
+<text>Arrow function: this refences the object that DEFINED the function</text>
+<button id="btn2">Click Me!</button>
+
+<p><strong>this</strong> represents:</p>
+<p id="demo2"></p>
+
+
 
 <script type="text/babel">
 class Hello extends React.Component {
@@ -26,7 +46,13 @@ ReactDOM.render(<Hello />, document.getElementById('mydiv'));
 </script>
 
 <script type="text/javascript">
-// Use some ES6 features
+/*
+
+These are straight ES6 features
+    No react used below
+
+*/
+
 class Person {
   constructor(name) {
     this.name = name;
@@ -54,6 +80,76 @@ class Employee extends Person {
 
 thisEmployee = new Employee('Jim', 'Developer');
 document.getElementById('es6Employee').textContent = thisEmployee.showJob();
+
+
+/*
+    Anatomy of an arrow function
+*/
+
+// old way
+//hello = function() {
+//  return "Arrow Contect FTW";
+//}
+
+// Works also... (this is used if multiple lines in function)
+//hello = () => {
+//    return "Arrow Function Content!";
+//}
+
+// If only one statment that returns value
+//hello = () => 'This short arrow function content~';
+// document.getElementById('arrowTest').textContent = hello();
+
+//  Parameters are passed in the parenthesis
+arrowVal = 'short';
+//thisFunction = (val) => 'This arrow function content written by: ' + val;
+//  ... AND if there's only one parameter, you can skip the parentheses
+thisFunction = val => "Arrow function are very: " + val;
+
+document.getElementById('arrowTest').textContent = thisFunction(arrowVal);
+
+/*
+   Handling of `this` is arrow functions
+*/
+
+class Header {
+  constructor() {
+    this.color = "Red";
+  }
+
+  // Regular function
+  changeColor = function() {
+    document.getElementById("demo").innerHTML += this;
+  }
+}
+
+myheader = new Header();
+
+//    -- IN A REGULAR FUNCTION `this` is the object that *called* the function
+// window object calls the function
+window.addEventListener("load", myheader.changeColor);
+// button object calls the function
+document.getElementById('btn').addEventListener("click", myheader.changeColor);
+
+
+class Header2 {
+  constructor() {
+    this.color = 'Red';
+  }
+
+  // Arrow function:
+  changeColor = () => {
+    document.getElementById('demo2').innerHTML += this;
+  }
+}
+
+myheader2 = new Header2();
+
+// window calls the function
+window.addEventListener('load', myheader2.changeColor);
+// button calls the function
+document.getElementById('btn2').addEventListener('click', myheader2.changeColor);
+
 
 
 </script>
