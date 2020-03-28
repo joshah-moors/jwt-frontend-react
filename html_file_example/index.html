@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>React Directly in HTML files</title>
+  <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+
+<div id="mydiv"></div>
+
+<p>
+  <h2 id="es6Person"></h2>
+</p>
+
+<script type="text/babel">
+class Hello extends React.Component {
+  render() {
+    return <h1>Hello World!</h1>
+  }
+}
+
+ReactDOM.render(<Hello />, document.getElementById('mydiv'));
+</script>
+
+<script type="text/javascript">
+// Use some ES6 features
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  present() {
+    return this.name;
+  }
+}
+
+personOfHour = new Person('Joshah');
+console.log(personOfHour);
+document.getElementById('es6Person').innerHTML = personOfHour.present();
+</script>
+
+</body>
+</html>
