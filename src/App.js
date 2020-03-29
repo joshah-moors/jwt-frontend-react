@@ -29,23 +29,74 @@ class Car extends React.Component {
     );
   }
 }
+/*
+Mounting methods:
+    • constructor()
+    • getDerivedStateFromProps()
+    • render()
+    • componentDidMount()
+*/
 
+//class Header extends React.Component {
+//  constructor(props) {
+//    super(props);
+//    this.state = {favoritecolor: "red"};
+//  }
+//  //static getDerivedStateFromProps(props, state) {
+//  //  return {favoritecolor: props.favcol };
+//  //}
+//  componentDidMount() {
+//    setTimeout(() => {
+//      this.setState({favoritecolor: "beige"})
+//    }, 1000)
+//  }
+//  render() {
+//    return (
+//      <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+//    );
+//  }
+//}
+
+/*
+Updating Methods:
+    • getDerivedStateFromProps()
+    • shouldComponentUpdate()
+    • render()
+    • getSnapshotBeforeUpdate()
+    • componentDidUpdate()
+*/
 class Header extends React.Component {
   constructor(props) {
     super(props);
     this.state = {favoritecolor: "red"};
   }
   //static getDerivedStateFromProps(props, state) {
-  //  return {favoritecolor: props.favcol };
+  //  return {favoritecolor: props.favcol};
+  //}
+  //shouldComponentUpdate() {
+  //  return true;
+  //}
+  //changeColor = () => {
+  //  this.setState({favoritecolor: "blue"});
   //}
   componentDidMount() {
     setTimeout(() => {
-      this.setState({favoritecolor: "beige"})
+      this.setState({favoritecolor: "yellow"})
     }, 1000)
+  }
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    document.getElementById("div1").innerHTML = "Before the update, favorite was " + prevState.favoritecolor;
+  }
+  componentDidUpdate() {
+    document.getElementById("div2").innerHTML = "The updated favorite is " + this.state.favoritecolor;
   }
   render() {
     return (
-      <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+      <div>
+        <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+        <div id="div1"></div>
+        <div id="div2"></div>
+      </div>
     );
   }
 }
