@@ -65,40 +65,98 @@ Updating Methods:
     • getSnapshotBeforeUpdate()
     • componentDidUpdate()
 */
-class Header extends React.Component {
+//class Header extends React.Component {
+//  constructor(props) {
+//    super(props);
+//    this.state = {favoritecolor: "red"};
+//  }
+//  //static getDerivedStateFromProps(props, state) {
+//  //  return {favoritecolor: props.favcol};
+//  //}
+//  //shouldComponentUpdate() {
+//  //  return true;
+//  //}
+//  //changeColor = () => {
+//  //  this.setState({favoritecolor: "blue"});
+//  //}
+//  componentDidMount() {
+//    setTimeout(() => {
+//      this.setState({favoritecolor: "yellow"})
+//    }, 1000)
+//  }
+//  getSnapshotBeforeUpdate(prevProps, prevState) {
+//    document.getElementById("div1").innerHTML = "Before the update, favorite was " + prevState.favoritecolor;
+//  }
+//  componentDidUpdate() {
+//    document.getElementById("div2").innerHTML = "The updated favorite is " + this.state.favoritecolor;
+//  }
+//  render() {
+//    return (
+//      <div>
+//        <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+//        <div id="div1"></div>
+//        <div id="div2"></div>
+//      </div>
+//    );
+//  }
+//}
+
+/*
+Unmounting phase of component lifecycle
+    • componentWillUnmount
+*/
+
+function shoot() {
+  alert("Great shot!");
+}
+
+class Container extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {favoritecolor: "red"};
+    this.state = {show: true};
   }
-  //static getDerivedStateFromProps(props, state) {
-  //  return {favoritecolor: props.favcol};
-  //}
-  //shouldComponentUpdate() {
-  //  return true;
-  //}
-  //changeColor = () => {
-  //  this.setState({favoritecolor: "blue"});
-  //}
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({favoritecolor: "yellow"})
-    }, 1000)
-  }
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    document.getElementById("div1").innerHTML = "Before the update, favorite was " + prevState.favoritecolor;
-  }
-  componentDidUpdate() {
-    document.getElementById("div2").innerHTML = "The updated favorite is " + this.state.favoritecolor;
+  delHeader = () => {
+    this.setState({show: false});
   }
   render() {
+    let myheader;
+    if (this.state.show) {
+      myheader = <Child />;
+    };
     return (
       <div>
-        <h1>My Favorite Color is {this.state.favoritecolor}</h1>
-        <div id="div1"></div>
-        <div id="div2"></div>
+      {myheader}
+      <button type="button" onClick={this.delHeader}>Delete Header</button>
+      <br />
+      <button type="button" onClick={shoot}>Shoot</button>
       </div>
     );
   }
 }
 
-export default Header;
+class Child extends React.Component {
+  componentWillUnmount() {
+    alert("The component named Header is about to be unmounted");
+  }
+  render() {
+    return (
+      <h1>Hello World!</h1>
+    );
+  }
+}
+
+/*
+    EVENT HANDLERS
+*/
+class Football extends React.Component {
+  shoot = (a, b) => {
+    alert(b.type);
+  }
+  render() {
+    return(
+      <button onClick={(ev) => this.shoot("Goal", ev)}>Take the shot</button>
+    );
+  }
+}
+
+export default Football;
