@@ -162,27 +162,35 @@ class Football extends React.Component {
 /*
     FORMS
 */
-class MyForm extends React.Component {
+class ThisForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
       age: null,
+      errormessage: '',
     };
   }
   mySubmitHandler = (event) => {
     event.preventDefault();
     let age = this.state.age;
-    if (!Number(age)) {
-      alert("Your age must be a number");
-    }
+    //if (!Number(age)) {
+    //  alert("Your age must be a number");
+    //}
     alert("You are submitting " + this.state.username);
   }
   myChangeHandler = (event) => {
     //this.setState({username: event.target.value});
     let nam = event.target.name;
     let val = event.target.value;
+    let err = '';
+    if (nam === "age") {
+      if (val != "" && !Number(val)) {
+        err = <strong>Your age must be a number</strong>;
+      }
+    }
     // could put form validation here
+    this.setState({errormessage: err});
     this.setState({[nam]: val});
   }
   render() {
@@ -207,9 +215,33 @@ class MyForm extends React.Component {
           name='age'
           onChange={this.myChangeHandler}
         />
+        {this.state.errormessage}
         <input
           type="submit"
         />
+      </form>
+    );
+  }
+}
+
+class MyForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      description: 'The content of a textarea goes in the value attribute',
+      mycar: 'Volvo',
+    };
+  }
+  render() {
+    return (
+      <form>
+        <textarea value={this.state.description} />
+        <br />
+        <select value={this.state.mycar}>
+          <option value="Ford">Ford</option>
+          <option value="Volvo">Volvo</option>
+          <option value="Fiat">Fiat</option>
+        </select>
       </form>
     );
   }
