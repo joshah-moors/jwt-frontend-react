@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MyForm from './App.js';
+import MyHeader from './App.js';
 
 //const myelement = <Car brand="Ford" />;
 
-ReactDOM.render(<MyForm />, document.getElementById('root'));
+ReactDOM.render(<MyHeader />, document.getElementById('root'));
