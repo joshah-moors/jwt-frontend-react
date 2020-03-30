@@ -65,41 +65,41 @@ Updating Methods:
     • getSnapshotBeforeUpdate()
     • componentDidUpdate()
 */
-//class Header extends React.Component {
-//  constructor(props) {
-//    super(props);
-//    this.state = {favoritecolor: "red"};
-//  }
-//  //static getDerivedStateFromProps(props, state) {
-//  //  return {favoritecolor: props.favcol};
-//  //}
-//  //shouldComponentUpdate() {
-//  //  return true;
-//  //}
-//  //changeColor = () => {
-//  //  this.setState({favoritecolor: "blue"});
-//  //}
-//  componentDidMount() {
-//    setTimeout(() => {
-//      this.setState({favoritecolor: "yellow"})
-//    }, 1000)
-//  }
-//  getSnapshotBeforeUpdate(prevProps, prevState) {
-//    document.getElementById("div1").innerHTML = "Before the update, favorite was " + prevState.favoritecolor;
-//  }
-//  componentDidUpdate() {
-//    document.getElementById("div2").innerHTML = "The updated favorite is " + this.state.favoritecolor;
-//  }
-//  render() {
-//    return (
-//      <div>
-//        <h1>My Favorite Color is {this.state.favoritecolor}</h1>
-//        <div id="div1"></div>
-//        <div id="div2"></div>
-//      </div>
-//    );
-//  }
-//}
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {favoritecolor: "red"};
+  }
+  //static getDerivedStateFromProps(props, state) {
+  //  return {favoritecolor: props.favcol};
+  //}
+  //shouldComponentUpdate() {
+  //  return true;
+  //}
+  //changeColor = () => {
+  //  this.setState({favoritecolor: "blue"});
+  //}
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({favoritecolor: "yellow"})
+    }, 1000)
+  }
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    document.getElementById("div1").innerHTML = "Before the update, favorite was " + prevState.favoritecolor;
+  }
+  componentDidUpdate() {
+    document.getElementById("div2").innerHTML = "The updated favorite is " + this.state.favoritecolor;
+  }
+  render() {
+    return (
+      <div>
+        <h1>My Favorite Color is {this.state.favoritecolor}</h1>
+        <div id="div1"></div>
+        <div id="div2"></div>
+      </div>
+    );
+  }
+}
 
 /*
 Unmounting phase of component lifecycle
@@ -159,4 +159,61 @@ class Football extends React.Component {
   }
 }
 
-export default Football;
+/*
+    FORMS
+*/
+class MyForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      age: null,
+    };
+  }
+  mySubmitHandler = (event) => {
+    event.preventDefault();
+    let age = this.state.age;
+    if (!Number(age)) {
+      alert("Your age must be a number");
+    }
+    alert("You are submitting " + this.state.username);
+  }
+  myChangeHandler = (event) => {
+    //this.setState({username: event.target.value});
+    let nam = event.target.name;
+    let val = event.target.value;
+    // could put form validation here
+    this.setState({[nam]: val});
+  }
+  render() {
+    //let header = "";
+    //if (this.state.username) {
+    //  header = <h1>Hello {this.state.username}</h1>
+    //} else {
+    //  header = "";
+    //}
+    return (
+      <form onSubmit={this.mySubmitHandler}>
+        <h1>Hello {this.state.username} {this.state.age}</h1>
+        <p>Enter your name:</p>
+        <input
+          type='text'
+          name='username'
+          onChange={this.myChangeHandler}
+        />
+        <p>Enter your age:</p>
+        <input
+          type='text'
+          name='age'
+          onChange={this.myChangeHandler}
+        />
+        <input
+          type="submit"
+        />
+      </form>
+    );
+  }
+}
+
+
+export default MyForm;
