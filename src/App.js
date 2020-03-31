@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+//import './App.css';
+import styles from './mystyle.module.css';
 
 class Car extends React.Component {
   constructor(props) {
@@ -248,4 +250,26 @@ class MyForm extends React.Component {
 }
 
 
-export default MyForm;
+/*
+    React Styling
+*/
+
+class MyHeader extends React.Component {
+  render() {
+    const mystyle = {
+      color: "white",
+      backgroundColor: "DodgerBlue",
+      padding: "10px",
+      fontFamily: "Arial",
+    }
+    return (
+      <div>
+      <h1 className={styles.bigblue} >Hello Style!</h1>
+      <p>Add a little style</p>
+      </div>
+    );
+  }
+}
+
+
+export default MyHeader;
