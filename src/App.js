@@ -10,6 +10,15 @@ class App extends Component {
       store: null,
     };
   }
+  componentDidMount() {
+    this.storeCollector();
+  }
+  storeCollector() {
+    let store = JSON.parse(localStorage.getItem('login'));
+    if (store && store.login) {
+      this.setState({login: true, store: store});
+    }
+  }
   login() {
     fetch("http:\/\/127.0.0.1:8000/auth/api/v1/login", {
       method: "POST",
@@ -25,7 +34,21 @@ class App extends Component {
           accessToken: result.accessToken,
           refreshToken: result.refreshToken,
         }))
-        this.setState({login: true});
+        this.storeCollector();
+      })
+    })
+  }
+  getPrivate() {
+    let token = "JWT " + this.state.store.accessToken;
+    fetch("http:\/\/127.0.0.1:8000/media/api/v1/private", {
+      method: "GET",
+      headers: {"Authorization": token},
+    }).then((response) => {
+      response.json().then((result) => {
+        this.setState({
+          response: result.data
+        })
+        console.warn("result", result);
       })
     })
   }
@@ -63,7 +86,8 @@ class App extends Component {
           <textarea onChange={(event) => this.setState({post: event.target.value})}>
             
           </textarea>
-          <button onClick={() => {this.post()}}>POST</button>
+          <button onClick={() => {this.getPrivate()}}>POST</button>
+          <p>{this.state.response}</p>
         </div>
         }
       </div>
