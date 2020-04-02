@@ -1,29 +1,6 @@
 import React, { Component } from 'react';
 import 'bulma/css/bulma.css'
 
-class ErrorMessage extends Component {
-  render() {
-    return(
-        <div class="container">
-          <br />
-          <div class="columns">
-            <div class="column">
-              <article class="message is-danger">
-                <div class="message-header">
-                  <p>Error</p>
-                  <button class="delete" aria-label="delete"></button>
-                </div>
-                <div class="message-body">
-                  There was an error processing this request.
-                </div>
-              </article>
-            </div>
-            <div class="column"></div>
-          </div>
-        </div>
-    );
-  }
-}
 
 class App extends Component {
   constructor(props) {
@@ -33,6 +10,7 @@ class App extends Component {
       password: null,
       login: false,
       store: null,
+      contenterror: false,
     };
   }
   componentDidMount() {
@@ -133,7 +111,23 @@ class App extends Component {
               class="button is-rounded"
               onClick={() => {this.getPrivate()}}
             >POST</button>
-            <div><ErrorMessage /></div>
+            <div class="container">
+              <br />
+              <div class="columns">
+                <div class="column">
+                  <article class="message is-danger">
+                    <div class="message-header">
+                      <p>Error</p>
+                      <button class="delete" aria-label="delete"></button>
+                    </div>
+                    <div class="message-body">
+                      There was an error processing this request.
+                    </div>
+                  </article>
+                </div>
+                <div class="column"></div>
+              </div>
+            </div>
             <p>{this.state.response}</p>
           </div>
           }
