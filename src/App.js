@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import 'react-bulma-components/dist/react-bulma-components.min.css';
+import { Button, Field, Section } from 'react-bulma-components';
+//import { Field, Control, Label, Input, Textarea, Select, Checkbox, Radio, Help, InputFile } from 'react-bulma-components/lib/components/form';
 
 class App extends Component {
   constructor(props) {
@@ -54,43 +57,48 @@ class App extends Component {
   }
   render() {
     return (
-      <div>
-        <h1>JWT Token with React</h1>
-        {
-          !this.state.login?
-          <div>
-          <label>
-            Username:
-            <br />
-            <input 
-              type="text" 
-              onChange={(event) => {this.setState({username: event.target.value})}}
-            />
-          </label>
-          <br /><br />
-          <label>
-            Password:
-            <br />
-            <input 
-              type="password"
-              onChange={(event) => {this.setState({password: event.target.value})}}
-            />
-          </label>
-          <br /><br />
-          <button 
-            onClick={() => {this.login()}}
-          >Login</button>
-        </div>
-        :
+      <Section>
         <div>
-          <textarea onChange={(event) => this.setState({post: event.target.value})}>
-            
-          </textarea>
-          <button onClick={() => {this.getPrivate()}}>POST</button>
-          <p>{this.state.response}</p>
+          <h1>JWT Token with React</h1>
+          {
+            !this.state.login?
+            <div>
+              <div>
+              <label>
+                Username:
+                <br />
+                <input 
+                  type="text" 
+                  onChange={(event) => {this.setState({username: event.target.value})}}
+                />
+              </label>
+              </div>
+              <br /><br />
+              <label>
+                Password:
+                <br />
+                <input 
+                  type="password"
+                  onChange={(event) => {this.setState({password: event.target.value})}}
+                />
+              </label>
+              <br /><br />
+              <Button 
+                rounded
+                onClick={() => {this.login()}}
+              >Login</Button>
+            </div>
+          :
+          <div>
+            <textarea onChange={(event) => this.setState({post: event.target.value})}>
+              
+            </textarea>
+            <button onClick={() => {this.getPrivate()}}>POST</button>
+            <p>{this.state.response}</p>
+          </div>
+          }
         </div>
-        }
-      </div>
+      </Section>
     );
   }
 }
