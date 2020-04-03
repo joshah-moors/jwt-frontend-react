@@ -56,13 +56,22 @@ class App extends Component {
       method: "GET",
       headers: {"Authorization": token},
     }).then((response) => {
-      response.json().then((result) => {
-        this.setState({
-          response: result.data
+      if (!response.ok) {
+        this.setState({contenterror: true});
+      } else {
+        response.json().then((result) => {
+          this.setState({
+            response: result.data
+          })
+          console.warn("result", result);
         })
-        console.warn("result", result);
-      })
+      }
+    }).catch((response) => {
+      this.setState({contenterror: true});
     })
+  }
+  closeError() {
+    this.setState({contenterror: false});
   }
   render() {
     return (
@@ -113,20 +122,26 @@ class App extends Component {
             >POST</button>
             <div class="container">
               <br />
-              <div class="columns">
-                <div class="column">
-                  <article class="message is-danger">
-                    <div class="message-header">
-                      <p>Error</p>
-                      <button class="delete" aria-label="delete"></button>
-                    </div>
-                    <div class="message-body">
-                      There was an error processing this request.
-                    </div>
-                  </article>
+              {this.state.contenterror &&
+                <div class="columns">
+                  <div class="column">
+                    <article class="message is-danger">
+                      <div class="message-header">
+                        <p>Error</p>
+                        <button 
+                          class="delete" 
+                          aria-label="delete" 
+                          onClick={() => this.closeError()}
+                          ></button>
+                      </div>
+                      <div class="message-body">
+                        There was an error processing this request.
+                      </div>
+                    </article>
+                  </div>
+                  <div class="column"></div>
                 </div>
-                <div class="column"></div>
-              </div>
+              }
             </div>
             <p>{this.state.response}</p>
           </div>
