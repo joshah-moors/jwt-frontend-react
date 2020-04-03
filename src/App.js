@@ -70,6 +70,9 @@ class App extends Component {
       this.setState({contenterror: true});
     })
   }
+  closeError() {
+    this.setState({contenterror: false});
+  }
   render() {
     return (
       <div class="section">
@@ -125,7 +128,11 @@ class App extends Component {
                     <article class="message is-danger">
                       <div class="message-header">
                         <p>Error</p>
-                        <button class="delete" aria-label="delete"></button>
+                        <button 
+                          class="delete" 
+                          aria-label="delete" 
+                          onClick={() => this.closeError()}
+                          ></button>
                       </div>
                       <div class="message-body">
                         There was an error processing this request.
