@@ -8,6 +8,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // eslint-disable-next-line
+      apiBaseUrl: 'http:\/\/127.0.0.1:8000',
       username: null,
       password: null,
       login: false,
@@ -31,7 +33,7 @@ class App extends Component {
     }
   }
   login() {
-    fetch("http:\/\/127.0.0.1:8000/auth/api/v1/login", {
+    fetch(this.state.apiBaseUrl + "/auth/api/v1/login", {
       method: "POST",
       body: JSON.stringify(this.state),
       headers: {
@@ -55,7 +57,7 @@ class App extends Component {
   }
   getPrivate() {
     let token = "JWT " + this.state.store.accessToken;
-    fetch("http:\/\/127.0.0.1:8000/media/api/v1/private", {
+    fetch(this.state.apiBaseUrl + "/media/api/v1/private", {
       method: "GET",
       headers: {"Authorization": token},
     }).then((response) => {
@@ -85,69 +87,69 @@ class App extends Component {
   }
   render() {
     return (
-      <div class="section">
+      <div className="section">
         <div>
           <div className={`modal ${!this.state.isModalVisible ? "" : "is-active"}`}>
-            <div class="modal-background"></div>
-            <div class="modal-card">
-              <header class="modal-card-head">
-                <p class="modal-card-title">Response from Server</p>
+            <div className="modal-background"></div>
+            <div className="modal-card">
+              <header className="modal-card-head">
+                <p className="modal-card-title">Response from Server</p>
                 <button 
-                  class="delete" 
+                  className="delete" 
                   aria-label="close"
                   onClick={() => {this.closeModal()}}></button>
               </header>
-              <section class="modal-card-body">
+              <section className="modal-card-body">
                 {this.state.response}
               </section>
-              <footer class="modal-card-foot">
+              <footer className="modal-card-foot">
                 <button 
-                  class="button is-success"
+                  className="button is-success"
                   onClick={() => {this.closeModal()}}
                   >OK</button>
               </footer>
             </div>
           </div>
-          <h1 class="title">JWT Token with React</h1>
+          <h1 className="title">React Front-end Implementing JWT Login</h1>
           {
             !this.state.login?
-            <div class="container">
-              <div class="field">
-                <label class="label">Username</label>
-                <div class="control has-icons-left has-icons-right">
+            <div className="container">
+              <div className="field">
+                <label className="label">Username</label>
+                <div className="control has-icons-left has-icons-right">
                   <input 
-                    class="input" 
+                    className="input" 
                     type="text" 
                     onChange={(event) => {this.setState({username: event.target.value})}}
                     />
-                  <span class="icon is-small is-left">
-                    <i class="fas fa-user"></i>
+                  <span className="icon is-small is-left">
+                    <i className="fas fa-user"></i>
                   </span>
                 </div>
               </div>
-              <div class="field">
-                <label class="label">Password</label>
+              <div className="field">
+                <label className="label">Password</label>
                 <input 
-                  class="input"
+                  className="input"
                   type="password"
                   onChange={(event) => {this.setState({password: event.target.value})}} 
                   onKeyPress={(event) => {this.keyPressed(event)}}
                 />
               </div>
               <button 
-                class="button is-rounded"
+                className="button is-rounded"
                 onClick={() => {this.login()}}
               >Login</button>
             </div>
           :
-          <div class="container">
-            <nav class="navbar" role="navigation" aria-label="main navigation">
-              <div id="navbarBasicExample" class="navbar-menu">
-                <div class="navbar-end">
-                  <div class="navbar-item">
-                    <div class="buttons">
+          <div className="container">
+            <nav className="navbar" role="navigation" aria-label="main navigation">
+              <div id="navbarBasicExample" className="navbar-menu">
+                <div className="navbar-end">
+                  <div className="navbar-item">
+                    <div className="buttons">
                       <button 
-                        class="button is-info is-light is-rounded"
+                        className="button is-info is-light is-rounded"
                         onClick={() => {this.clearState()}}
                         >Clear State</button>
                     </div>
@@ -156,39 +158,39 @@ class App extends Component {
               </div>
             </nav>
             <br /><br />
-            <div class="columns">
-              <div class="column"></div>
-              <div class="column is-three-quarters custom-div">
+            <div className="columns">
+              <div className="column"></div>
+              <div className="column is-three-quarters custom-div">
                 <br /><br />
                 <button 
-                  class="button is-info is-rounded"
+                  className="button is-info is-rounded"
                   onClick={() => {this.getPrivate()}}
                 >GET Private Data</button>
-                <div class="container">
+                <div className="container">
                   <br />
                   {this.state.contenterror &&
-                    <div class="columns">
-                      <div class="column">
-                        <article class="message is-danger">
-                          <div class="message-header">
+                    <div className="columns">
+                      <div className="column">
+                        <article className="message is-danger">
+                          <div className="message-header">
                             <p>Error</p>
                             <button 
-                              class="delete" 
+                              className="delete" 
                               aria-label="delete" 
                               onClick={() => this.closeError()}
                               ></button>
                           </div>
-                          <div class="message-body">
+                          <div className="message-body">
                             There was an error processing this request.
                           </div>
                         </article>
                       </div>
-                      <div class="column"></div>
+                      <div className="column"></div>
                     </div>
                   }
                 </div>
               </div>
-              <div class="column"></div>
+              <div className="column"></div>
             </div>
           </div>
           }
