@@ -73,6 +73,11 @@ class App extends Component {
   closeError() {
     this.setState({contenterror: false});
   }
+  clearState() {
+    localStorage.clear();
+    this.setState({login: false});
+    this.storeCollector();
+  }
   render() {
     return (
       <div class="section">
@@ -111,6 +116,20 @@ class App extends Component {
             </div>
           :
           <div class="container">
+            <nav class="navbar" role="navigation" aria-label="main navigation">
+              <div id="navbarBasicExample" class="navbar-menu">
+                <div class="navbar-end">
+                  <div class="navbar-item">
+                    <div class="buttons">
+                      <button 
+                        class="button is-info is-rounded"
+                        onClick={() => {this.clearState()}}
+                        >Clear State</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nav>
             <textarea 
               class="textarea"
               onChange={(event) => this.setState({post: event.target.value})}>
