@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import './App.css';
 import 'bulma/css/bulma.css'
 
 
@@ -11,6 +13,7 @@ class App extends Component {
       login: false,
       store: null,
       contenterror: false,
+      isModalVisible: false,
     };
   }
   componentDidMount() {
@@ -60,9 +63,8 @@ class App extends Component {
         this.setState({contenterror: true});
       } else {
         response.json().then((result) => {
-          this.setState({
-            response: result.data
-          })
+          this.setState({response: result.data});
+          this.setState({isModalVisible: true});
           console.warn("result", result);
         })
       }
@@ -78,10 +80,34 @@ class App extends Component {
     this.setState({login: false});
     this.storeCollector();
   }
+  closeModal() {
+    this.setState({isModalVisible: false});
+  }
   render() {
     return (
       <div class="section">
         <div>
+          <div className={`modal ${!this.state.isModalVisible ? "" : "is-active"}`}>
+            <div class="modal-background"></div>
+            <div class="modal-card">
+              <header class="modal-card-head">
+                <p class="modal-card-title">Response from Server</p>
+                <button 
+                  class="delete" 
+                  aria-label="close"
+                  onClick={() => {this.closeModal()}}></button>
+              </header>
+              <section class="modal-card-body">
+                {this.state.response}
+              </section>
+              <footer class="modal-card-foot">
+                <button 
+                  class="button is-success"
+                  onClick={() => {this.closeModal()}}
+                  >OK</button>
+              </footer>
+            </div>
+          </div>
           <h1 class="title">JWT Token with React</h1>
           {
             !this.state.login?
@@ -112,7 +138,6 @@ class App extends Component {
                 class="button is-rounded"
                 onClick={() => {this.login()}}
               >Login</button>
-              
             </div>
           :
           <div class="container">
@@ -122,7 +147,7 @@ class App extends Component {
                   <div class="navbar-item">
                     <div class="buttons">
                       <button 
-                        class="button is-info is-rounded"
+                        class="button is-info is-light is-rounded"
                         onClick={() => {this.clearState()}}
                         >Clear State</button>
                     </div>
@@ -130,39 +155,41 @@ class App extends Component {
                 </div>
               </div>
             </nav>
-            <textarea 
-              class="textarea"
-              onChange={(event) => this.setState({post: event.target.value})}>
-            </textarea>
-            <br />
-            <button 
-              class="button is-rounded"
-              onClick={() => {this.getPrivate()}}
-            >POST</button>
-            <div class="container">
-              <br />
-              {this.state.contenterror &&
-                <div class="columns">
-                  <div class="column">
-                    <article class="message is-danger">
-                      <div class="message-header">
-                        <p>Error</p>
-                        <button 
-                          class="delete" 
-                          aria-label="delete" 
-                          onClick={() => this.closeError()}
-                          ></button>
+            <br /><br />
+            <div class="columns">
+              <div class="column"></div>
+              <div class="column is-three-quarters custom-div">
+                <br /><br />
+                <button 
+                  class="button is-info is-rounded"
+                  onClick={() => {this.getPrivate()}}
+                >GET Private Data</button>
+                <div class="container">
+                  <br />
+                  {this.state.contenterror &&
+                    <div class="columns">
+                      <div class="column">
+                        <article class="message is-danger">
+                          <div class="message-header">
+                            <p>Error</p>
+                            <button 
+                              class="delete" 
+                              aria-label="delete" 
+                              onClick={() => this.closeError()}
+                              ></button>
+                          </div>
+                          <div class="message-body">
+                            There was an error processing this request.
+                          </div>
+                        </article>
                       </div>
-                      <div class="message-body">
-                        There was an error processing this request.
-                      </div>
-                    </article>
-                  </div>
-                  <div class="column"></div>
+                      <div class="column"></div>
+                    </div>
+                  }
                 </div>
-              }
+              </div>
+              <div class="column"></div>
             </div>
-            <p>{this.state.response}</p>
           </div>
           }
         </div>
