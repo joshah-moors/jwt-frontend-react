@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-
+import 'bulma/css/bulma.css';
 import './App.css';
-import 'bulma/css/bulma.css'
+import API from './components/api';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // eslint-disable-next-line
-      apiBaseUrl: 'http:\/\/127.0.0.1:8000',
+      apiBaseUrl: `http://127.0.0.1:8000`,
       username: null,
       password: null,
       login: false,
@@ -33,27 +32,17 @@ class App extends Component {
     }
   }
   login() {
-    fetch(this.state.apiBaseUrl + "/auth/api/v1/login", {
-      method: "POST",
-      body: JSON.stringify(this.state),
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8'
-      }
-    }).then((response) => {
-      if (!response.ok) {
-        alert("There's a dam error!!!");
-      } else {
-        response.json().then((result) => {
-          console.warn("result", result);
-          localStorage.setItem("login", JSON.stringify({
-            login: true,
-            accessToken: result.accessToken,
-            refreshToken: result.refreshToken,
-          }))
-          this.storeCollector();
-        })
-      }
-    })
+    API.post('/auth/api/v1/login', this.state)
+      .then((response) => {
+        console.warn('response', response);
+        localStorage.setItem("login", JSON.stringify({
+          login: true,
+          accessToken: response.data.accessToken,
+          refreshToken: response.data.refreshToken,
+        }))
+        this.storeCollector();
+      })
+      .catch(error => alert("Invalid login"));
   }
   getPrivate() {
     let token = "JWT " + this.state.store.accessToken;
