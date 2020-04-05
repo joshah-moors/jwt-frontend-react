@@ -59,7 +59,7 @@ class App extends Component {
     }
   }
   login() {
-    API.post('/auth/api/v1/login', this.state)
+    API.post('/api/v1/auth/login', this.state)
       .then((response) => {
         console.warn('response', response);
         localStorage.setItem("login", JSON.stringify({
@@ -72,6 +72,7 @@ class App extends Component {
       .catch((error) => {
         console.warn('error', error);
         this.setState({
+          // Need to add something that checks return code for error message
           loginError: true,
           loginErrorMsg: 'Invalid Username/Password',
         })
@@ -84,7 +85,7 @@ class App extends Component {
     let headers = {
       'Authorization': `JWT ${this.state.store.accessToken}`
     }
-    API.get('/media/api/v1/private', {
+    API.get('/api/v1/media/private', {
       headers: headers
     })
       .then((response) => {
