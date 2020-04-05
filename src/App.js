@@ -1,19 +1,46 @@
 import React, { Component } from 'react';
 import 'bulma/css/bulma.css';
 import './App.css';
+
+// Axios base instance
 import API from './components/api';
+
+
+class LoginError extends Component{
+  render() {
+    return(
+      <div>
+        <br /><br />
+        <article className="message is-danger">
+          <div className="message-header">
+            <p>Error</p>
+            <button 
+              className="delete" 
+              aria-label="delete" 
+              onClick={this.props.handler}
+              ></button>
+          </div>
+          <div className="message-body">
+            {this.props.errorMsg}
+          </div>
+        </article>
+      </div>
+    );
+  }
+}
 
 
 class App extends Component {
   constructor(props) {
     super(props);
+    this.closeLoginError = this.closeLoginError.bind(this);
     this.state = {
-      apiBaseUrl: `http://127.0.0.1:8000`,
       username: null,
       password: null,
       login: false,
+      loginError: false,
       store: null,
-      contenterror: false,
+      contentError: false,
       isModalVisible: false,
     };
   }
@@ -42,29 +69,35 @@ class App extends Component {
         }))
         this.storeCollector();
       })
-      .catch(error => alert("Invalid login"));
+      .catch((error) => {
+        console.warn('error', error);
+        this.setState({
+          loginError: true,
+          loginErrorMsg: 'Invalid Username/Password',
+        })
+      })
+  }
+  closeLoginError() {
+    this.setState({ loginError: false });
   }
   getPrivate() {
-    let token = "JWT " + this.state.store.accessToken;
-    fetch(this.state.apiBaseUrl + "/media/api/v1/private", {
-      method: "GET",
-      headers: {"Authorization": token},
-    }).then((response) => {
-      if (!response.ok) {
-        this.setState({contenterror: true});
-      } else {
-        response.json().then((result) => {
-          this.setState({response: result.data});
-          this.setState({isModalVisible: true});
-          console.warn("result", result);
-        })
-      }
-    }).catch((response) => {
-      this.setState({contenterror: true});
+    let headers = {
+      'Authorization': `JWT ${this.state.store.accessToken}`
+    }
+    API.get('/media/api/v1/private', {
+      headers: headers
     })
+      .then((response) => {
+        console.warn('response', response);
+        this.setState({getResponse: response.data.data});
+        this.setState({isModalVisible: true});
+      })
+      .catch((error) => {
+        this.setState({contentError: true});
+      })
   }
   closeError() {
-    this.setState({contenterror: false});
+    this.setState({contentError: false});
   }
   clearState() {
     localStorage.clear();
@@ -89,7 +122,7 @@ class App extends Component {
                   onClick={() => {this.closeModal()}}></button>
               </header>
               <section className="modal-card-body">
-                {this.state.response}
+                {this.state.getResponse}
               </section>
               <footer className="modal-card-foot">
                 <button 
@@ -129,6 +162,11 @@ class App extends Component {
                 className="button is-rounded"
                 onClick={() => {this.login()}}
               >Login</button>
+              {this.state.loginError &&
+              <LoginError 
+                errorMsg={this.state.loginErrorMsg}
+                handler={this.closeLoginError} />
+              }
             </div>
           :
           <div className="container">
@@ -156,26 +194,21 @@ class App extends Component {
                   onClick={() => {this.getPrivate()}}
                 >GET Private Data</button>
                 <div className="container">
-                  <br />
-                  {this.state.contenterror &&
-                    <div className="columns">
-                      <div className="column">
-                        <article className="message is-danger">
-                          <div className="message-header">
-                            <p>Error</p>
-                            <button 
-                              className="delete" 
-                              aria-label="delete" 
-                              onClick={() => this.closeError()}
-                              ></button>
-                          </div>
-                          <div className="message-body">
-                            There was an error processing this request.
-                          </div>
-                        </article>
+                  <br /><br /><br />
+                  {this.state.contentError &&
+                    <article className="message is-danger">
+                      <div className="message-header">
+                        <p>Error</p>
+                        <button 
+                          className="delete" 
+                          aria-label="delete" 
+                          onClick={() => this.closeError()}
+                          ></button>
                       </div>
-                      <div className="column"></div>
-                    </div>
+                      <div className="message-body">
+                        There was an error processing this request.
+                      </div>
+                    </article>
                   }
                 </div>
               </div>
