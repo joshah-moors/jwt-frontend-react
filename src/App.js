@@ -8,6 +8,25 @@ import API from './components/api';
 // npm install react-router-dom --save
 import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
 
+import Home from './pages';
+
+
+class App extends Component{
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+        </Switch>
+      </Router>
+    )
+  }
+}
+
+
+
+
+/*
 
 class LoginError extends Component{
   render() {
@@ -225,5 +244,7 @@ class App extends Component {
     );
   }
 }
+
+*/
 
 export default App;
