@@ -5,6 +5,9 @@ import './App.css';
 // Axios base instance
 import API from './components/api';
 
+// npm install react-router-dom --save
+import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
+
 
 class LoginError extends Component{
   render() {
