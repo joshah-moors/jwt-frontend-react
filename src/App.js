@@ -19,6 +19,21 @@ class LoginPage extends Component {
   }
 }
 
+class ProtectedPage extends Component {
+  render() {
+    return (
+      <div>
+        <h1>Protected Route</h1>
+        <ul>
+          <li>Data Item 1</li>
+          <li>Data Item 2</li>
+          <li>Data Item 3</li>
+        </ul>
+      </div>
+    )
+  }
+}
+
 
 class App extends Component {
   render() {
