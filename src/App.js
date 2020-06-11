@@ -11,17 +11,44 @@ import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-ro
 import Home from './pages';
 
 
-class App extends Component{
+class LoginPage extends Component {
+  render() {
+    return (
+      <h1>This is the Login Page</h1>
+    )
+  }
+}
+
+class ProtectedPage extends Component {
+  render() {
+    return (
+      <div>
+        <h1>Protected Route</h1>
+        <ul>
+          <li>Data Item 1</li>
+          <li>Data Item 2</li>
+          <li>Data Item 3</li>
+        </ul>
+      </div>
+    )
+  }
+}
+
+
+class App extends Component {
   render() {
     return (
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/data" component={ProtectedPage} />
         </Switch>
       </Router>
     )
   }
 }
+
 
 
 
