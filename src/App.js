@@ -3,11 +3,13 @@ import 'bulma/css/bulma.css';
 import './App.css';
 
 // Axios base instance
-import API from './components/api';
+//import API from './components/api';
 
 // npm install react-router-dom --save
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
+//import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+// Router Pages
 import Home from './pages';
 import LoginPage from './pages/login';
 import ProtectedPage from './pages/protected';
