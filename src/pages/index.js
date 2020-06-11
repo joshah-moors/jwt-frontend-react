@@ -26,6 +26,13 @@ class Home extends Component {
             </p>
           </div>
         </div>
+        <div className="section">
+          <div className="container">
+            <label>
+              Visit the old version that uses local storage: <a href="#">LocalStorage Login</a>
+            </label>
+          </div>
+        </div>
       </div>
     )
   }

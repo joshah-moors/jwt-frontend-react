@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // Axios base instance
-import API from './api';
+import API from '../components/api';
 
 
 class LoginError extends Component{
@@ -28,7 +28,7 @@ class LoginError extends Component{
 }
 
 
-class LocalhostLogin extends Component {
+class LocalStoreLogin extends Component {
   constructor(props) {
     super(props);
     this.closeLoginError = this.closeLoginError.bind(this);
@@ -222,4 +222,4 @@ class LocalhostLogin extends Component {
 }
 
 
-export default LocalhostLogin;
+export default LocalStoreLogin;
