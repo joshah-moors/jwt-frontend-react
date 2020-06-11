@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 
 class Home extends Component {
@@ -10,11 +11,11 @@ class Home extends Component {
             <h1 className="title">Home</h1>
             <ul className="ul">
               <li className="li">
-                <a href="#">Login</a>
+                <Link to="/login">Login</Link>
               </li>
               <li>-</li>
               <li className="li">
-                <a href="#">Protected Route</a>
+                <Link to="/data">Protected Route</Link>
               </li>
             </ul>
           </div>
@@ -24,6 +25,13 @@ class Home extends Component {
             <p>
               Descriptive text about this site goes here..
             </p>
+          </div>
+        </div>
+        <div className="section">
+          <div className="container">
+            <label>
+              Visit the old version that uses local storage: <Link to="/localhost_login">LocalStorage Login</Link>
+            </label>
           </div>
         </div>
       </div>
