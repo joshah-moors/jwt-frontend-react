@@ -42,6 +42,7 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/data" component={ProtectedPage} />
         </Switch>
       </Router>
     )
