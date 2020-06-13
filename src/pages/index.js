@@ -54,13 +54,8 @@ class Home extends Component {
             </p>
           </div>
         </div>
-        <div className="section">
-          <div className="container">
-            <br /><br /><br /><br /><br /><br />
-            <label>
-              Visit the old version that uses local storage: <Link to="/localhost_login">LocalStorage Login</Link>
-            </label>
-          </div>
+        <div className="index-footer">
+          Visit the old version that uses local storage: <Link to="/localhost_login">LocalStorage Login</Link>
         </div>
       </div>
     )
