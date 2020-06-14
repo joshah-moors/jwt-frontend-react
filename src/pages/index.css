@@ -1,33 +1,3 @@
-.banner {
-  width: 100vw;
-  background-color: #00997a;
-  padding: .5em 4em;
-  color: blue;
-  overflow: hidden
-}
-
-.banner-text {
-  float: right;
-  color: white;
-  font-weight: bold;
-  display: inline;
-}
-
-.banner-logo {
-  display: inline;
-  margin: 0px;
-  color: white;
-  font-weight: bold;
-}
-
-.banner-link {
-  color: white;
-  font-weight: bold;
-  border: solid 0.06em white;
-  padding: .25em .7em;
-  border-radius: 1em;
-}
-
 .index-footer {
   width: 100vw;
   text-align: center;
