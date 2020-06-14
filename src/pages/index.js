@@ -2,30 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
 
-
-class Banner extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loggedIn: false,
-      user: 'Llenora',
-    }
-  }
-  render() {
-    return (
-      <div className="banner">
-        <h2 className="banner-logo">JoshahLine Web Solutions</h2>
-        <h2 className="banner-text">
-        {!this.state.loggedIn?
-          <Link className="banner-link" to="/login">Login</Link>
-        :
-          <label>{ this.state.user }</label>
-        }
-        </h2>
-      </div>
-    )
-  }
-}
+import Banner from '../components/banner';
 
 
 class Home extends Component {
@@ -54,13 +31,8 @@ class Home extends Component {
             </p>
           </div>
         </div>
-        <div className="section">
-          <div className="container">
-            <br /><br /><br /><br /><br /><br />
-            <label>
-              Visit the old version that uses local storage: <Link to="/localhost_login">LocalStorage Login</Link>
-            </label>
-          </div>
+        <div className="index-footer">
+          Visit the old version that uses local storage: <Link to="/localhost_login">LocalStorage Login</Link>
         </div>
       </div>
     )
