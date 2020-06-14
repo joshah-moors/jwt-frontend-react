@@ -9,6 +9,11 @@ import './App.css';
 //import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
+// For working through redux this blog is helpful: https://www.valentinog.com/blog/redux/
+// Did these before updating index.js:
+//   npm install react-redux --save
+//   npm install redex --save
+
 // Router Pages
 import Home from './pages';
 import LoginPage from './pages/login';
