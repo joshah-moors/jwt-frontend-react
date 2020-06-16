@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { userLogout } from '../redux/actions';
 import './index.css';
 
 import ConnectedBanner from '../components/banner';
 
 
-class Home extends Component {
+const mapStateToProps = state => {
+  return { login: state.login, 
+           user: state.user };
+}
+
+const mapDispathToProps = dispatch => {
+  return { userLogout: () => dispatch(userLogout()) };
+}
+
+
+class ConnectedHome extends Component {
+  logout() {
+    this.props.userLogout();
+  }
   render() {
     return (
       <div>
@@ -13,15 +28,25 @@ class Home extends Component {
         <div className="section">
           <div className="container">
             <h1 className="title">Home</h1>
-            <ul className="ul">
-              <li className="li">
-                <Link to="/login">Login</Link>
-              </li>
-              <li>-</li>
-              <li className="li">
-                <Link to="/data">Protected Route</Link>
-              </li>
-            </ul>
+            {!this.props.login?
+              <ul className="ul">
+                <li className="li">
+                  <Link to="/login">Login</Link>
+                </li>
+              </ul>
+            :
+              <ul className="ul">
+                <li className="li">
+                  <Link to="/data">Protected Route</Link>
+                </li>
+                <li className="li">
+                  <label 
+                    className="li-link" 
+                    onClick={() => {this.logout()}}
+                  >Logout</label>
+                </li>
+              </ul>
+            }
           </div>
         </div>
         <div className="section">
@@ -39,5 +64,10 @@ class Home extends Component {
   }
 }
 
+
+//const Home = connect(mapStateToProps)(ConnectedHome);
+const Home = connect(
+    mapStateToProps,
+    mapDispathToProps)(ConnectedHome);
 
 export default Home;
