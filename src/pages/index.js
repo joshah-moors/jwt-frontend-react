@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './index.css';
 
-import Banner from '../components/banner';
+import ConnectedBanner from '../components/banner';
 
 
 class Home extends Component {
   render() {
     return (
       <div>
-        <Banner />
+        <ConnectedBanner />
         <div className="section">
           <div className="container">
             <h1 className="title">Home</h1>
