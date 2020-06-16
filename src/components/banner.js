@@ -8,22 +8,23 @@ const mapStateToProps = state => {
 }
 
 class Banner extends Component {
-  constructor(props) {
-    super(props);
+  //constructor(props) {
+  //  super(props);
   //  this.state = {
-  //    loggedIn: false,
-  //    user: 'Llenora',
+  //    //login: login,
+  //    //user: 'Llenora',
   //  }
-  }
+  //}
   render() {
+    const { login, user } = this.props;
     return (
       <div className="banner">
         <h2 className="banner-logo">JoshahLine Web Solutions</h2>
         <h2 className="banner-text">
-        {!this.state.login?
+        {!login?
           <Link className="banner-link" to="/login">Login</Link>
         :
-          <label>{ this.state.user }</label>
+          <label>{ user }</label>
         }
         </h2>
       </div>
@@ -44,6 +45,6 @@ const BannerTwo = ({ login, user }) => (
   </div>
 )
 
-const ConnectedBanner = connect(mapStateToProps)(BannerTwo);
+const ConnectedBanner = connect(mapStateToProps)(Banner);
 
 export default ConnectedBanner;

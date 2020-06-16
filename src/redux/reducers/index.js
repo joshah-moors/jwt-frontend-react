@@ -2,7 +2,7 @@ import { ADD_ARTICLE } from '../actions/types';
 
 const initialState = {
   articles: [],
-  login: true,
+  login: false,
   user: 'Joe',
 };
 
