@@ -37,7 +37,7 @@ class LoginError extends Component{
 }
 
 
-class LoginPage extends Component {
+class ConnectedLoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -52,7 +52,7 @@ class LoginPage extends Component {
     }
   }
   login() {
-    alert("ye");
+    alert("Login button pressed");
   }
   render() {
     return (
@@ -102,5 +102,9 @@ class LoginPage extends Component {
     )
   }
 }
+
+const LoginPage = connect(
+    null,
+    mapDispathToProps)(ConnectedLoginPage);
 
 export default LoginPage;
