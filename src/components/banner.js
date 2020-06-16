@@ -32,6 +32,8 @@ class Banner extends Component {
   }
 }
 
+
+// Same as above, but as a function of props
 const BannerTwo = ({ login, user }) => (
   <div className="banner">
     <h2 className="banner-logo">JoshahLine Web Solutions</h2>
