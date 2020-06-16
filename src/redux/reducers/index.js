@@ -1,6 +1,6 @@
 import { ADD_ARTICLE } from '../actions/types';
 
-import { USER_LOGIN } from '../actions/types';
+import { USER_LOGIN, USER_LOGOUT } from '../actions/types';
 
 const initialState = {
   articles: [],
@@ -21,6 +21,11 @@ function rootReducer(state = initialState, action) {
     return Object.assign({}, state, {
       login: true,
       user: action.payload.user
+    });
+  } else if (action.type === USER_LOGOUT) {
+    return Object.assign({}, state, {
+      login: false,
+      user: null
     });
   }
   return state;
