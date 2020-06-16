@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { userLogin } from '../redux/actions';
+import { userLogin, userLogout } from '../redux/actions';
 
 import Banner from '../components/banner';
 
 
-function mapDispathToProps(dispatch) {
-  return {
-    userLogin: user => dispatch(userLogin(user))
-  };
+//function mapDispathToProps(dispatch) {
+//  return {
+//    userLogin: user => dispatch(userLogin(user))
+//  };
+//}
+
+const mapDispathToProps = dispatch => {
+  return { userLogin: user => dispatch(userLogin(user)),
+           userLogout: () => dispatch(userLogout()) };
+}
+
+const mapStateToProps = state => {
+  return { login: state.login, user: state.user };
 }
 
 
@@ -41,7 +50,7 @@ class ConnectedLoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: null,
+      //user: null,
       password: null,
       loginError: false,
     };
@@ -54,8 +63,10 @@ class ConnectedLoginPage extends Component {
   login() {
     //alert("Login button pressed");
     const { user } = this.state;
-    alert(user);
     this.props.userLogin({ user });
+  }
+  logout() {
+    this.props.userLogout();
   }
   render() {
     return (
@@ -63,42 +74,52 @@ class ConnectedLoginPage extends Component {
       <Banner />
         <div className="section">
           <div className="container">
-            <h1 className="title">This is the Login Page</h1>
+            <h1 className="title">Login Page</h1>
             <Link to="/">Return to Home</Link>
             <br /><br />
-            <div className="container">
-              <div className="field">
-                <label className="label">Username</label>
-                <div className="control has-icons-left has-icons-right">
-                  <input 
-                    className="input" 
-                    type="text" 
-                    onChange={(event) => {this.setState({user: event.target.value})}}
-                    />
-                  <span className="icon is-small is-left">
-                    <i className="fas fa-user"></i>
-                  </span>
+            {!this.props.login?
+              <div className="container">
+                <div className="field">
+                  <label className="label">Username</label>
+                  <div className="control has-icons-left has-icons-right">
+                    <input 
+                      className="input" 
+                      type="text" 
+                      onChange={(event) => {this.setState({user: event.target.value})}}
+                      />
+                    <span className="icon is-small is-left">
+                      <i className="fas fa-user"></i>
+                    </span>
+                  </div>
                 </div>
+                <div className="field">
+                  <label className="label">Password</label>
+                  <input 
+                    className="input"
+                    type="password"
+                    onChange={(event) => {this.setState({password: event.target.value})}} 
+                    onKeyPress={(event) => {this.keyPressed(event)}}
+                  />
+                </div>
+                <button 
+                  className="button is-rounded"
+                  onClick={() => {this.login()}}
+                >Login</button>
+                {this.state.loginError &&
+                <LoginError 
+                  errorMsg={this.state.loginErrorMsg}
+                  handler={this.closeLoginError} />
+                }
               </div>
-              <div className="field">
-                <label className="label">Password</label>
-                <input 
-                  className="input"
-                  type="password"
-                  onChange={(event) => {this.setState({password: event.target.value})}} 
-                  onKeyPress={(event) => {this.keyPressed(event)}}
-                />
+            :
+              <div className="container">
+                <h3 className="title is-4">You are logged in as { this.props.user }</h3>
+                <button
+                  className="button is-rounded"
+                  onClick={() => {this.logout()}}
+                >Logout</button>
               </div>
-              <button 
-                className="button is-rounded"
-                onClick={() => {this.login()}}
-              >Login</button>
-              {this.state.loginError &&
-              <LoginError 
-                errorMsg={this.state.loginErrorMsg}
-                handler={this.closeLoginError} />
-              }
-            </div>
+            }
           </div>
         </div>
       </div>
@@ -107,7 +128,7 @@ class ConnectedLoginPage extends Component {
 }
 
 const LoginPage = connect(
-    null,
+    mapStateToProps,
     mapDispathToProps)(ConnectedLoginPage);
 
 export default LoginPage;
