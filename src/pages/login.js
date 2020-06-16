@@ -52,7 +52,10 @@ class ConnectedLoginPage extends Component {
     }
   }
   login() {
-    alert("Login button pressed");
+    //alert("Login button pressed");
+    const { username } = this.state;
+    alert(username);
+    this.props.userLogin({ username });
   }
   render() {
     return (
