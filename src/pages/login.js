@@ -6,6 +6,12 @@ import { userLogin, userLogout } from '../redux/actions';
 import Banner from '../components/banner';
 
 
+
+const mapStateToProps = state => {
+  return { login: state.login, 
+           user: state.user };
+}
+
 //function mapDispathToProps(dispatch) {
 //  return {
 //    userLogin: user => dispatch(userLogin(user))
@@ -15,10 +21,6 @@ import Banner from '../components/banner';
 const mapDispathToProps = dispatch => {
   return { userLogin: user => dispatch(userLogin(user)),
            userLogout: () => dispatch(userLogout()) };
-}
-
-const mapStateToProps = state => {
-  return { login: state.login, user: state.user };
 }
 
 
@@ -50,7 +52,7 @@ class ConnectedLoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      //user: null,
+      user: null,
       password: null,
       loginError: false,
     };
@@ -64,6 +66,7 @@ class ConnectedLoginPage extends Component {
     //alert("Login button pressed");
     const { user } = this.state;
     this.props.userLogin({ user });
+    this.props.history.push('/');
   }
   logout() {
     this.props.userLogout();

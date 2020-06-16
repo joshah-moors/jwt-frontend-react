@@ -5,3 +5,12 @@
   position: absolute;
   bottom: 0px;
 }
+
+.li-link {
+  color: #3273dc;
+}
+
+.li-link:hover {
+  color: #363636;
+  cursor: pointer;
+}
