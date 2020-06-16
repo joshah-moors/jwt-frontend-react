@@ -41,7 +41,7 @@ class ConnectedLoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: null,
+      user: null,
       password: null,
       loginError: false,
     };
@@ -53,9 +53,9 @@ class ConnectedLoginPage extends Component {
   }
   login() {
     //alert("Login button pressed");
-    const { username } = this.state;
-    alert(username);
-    this.props.userLogin({ username });
+    const { user } = this.state;
+    alert(user);
+    this.props.userLogin({ user });
   }
   render() {
     return (
@@ -73,7 +73,7 @@ class ConnectedLoginPage extends Component {
                   <input 
                     className="input" 
                     type="text" 
-                    onChange={(event) => {this.setState({username: event.target.value})}}
+                    onChange={(event) => {this.setState({user: event.target.value})}}
                     />
                   <span className="icon is-small is-left">
                     <i className="fas fa-user"></i>
