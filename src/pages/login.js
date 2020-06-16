@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { userLogin } from '../redux/actions';
 
 import Banner from '../components/banner';
+
+
+function mapDispathToProps(dispatch) {
+  return {
+    userLogin: user => dispatch(userLogin(user))
+  };
+}
 
 
 class LoginError extends Component{
