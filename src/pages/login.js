@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { userLogin } from '../redux/actions';
 
 import Banner from '../components/banner';
+
+
+function mapDispathToProps(dispatch) {
+  return {
+    userLogin: user => dispatch(userLogin(user))
+  };
+}
 
 
 class LoginError extends Component{
@@ -28,7 +37,7 @@ class LoginError extends Component{
 }
 
 
-class LoginPage extends Component {
+class ConnectedLoginPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,7 +52,10 @@ class LoginPage extends Component {
     }
   }
   login() {
-    alert("ye");
+    //alert("Login button pressed");
+    const { username } = this.state;
+    alert(username);
+    this.props.userLogin({ username });
   }
   render() {
     return (
@@ -93,5 +105,9 @@ class LoginPage extends Component {
     )
   }
 }
+
+const LoginPage = connect(
+    null,
+    mapDispathToProps)(ConnectedLoginPage);
 
 export default LoginPage;

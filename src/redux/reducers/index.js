@@ -1,9 +1,11 @@
 import { ADD_ARTICLE } from '../actions/types';
 
+import { USER_LOGIN } from '../actions/types';
+
 const initialState = {
   articles: [],
   login: false,
-  user: 'Joe',
+  user: null,
 };
 
 
@@ -15,6 +17,11 @@ function rootReducer(state = initialState, action) {
     });
     // .push() modified array in place - example of what NOT to do
     //state.articles.push(action.payload);
+  } else if (action.type === USER_LOGIN) {
+    return Object.assign({}, state, {
+      login: true,
+      user: action.payload.user
+    });
   }
   return state;
 };

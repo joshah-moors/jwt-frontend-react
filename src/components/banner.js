@@ -16,15 +16,15 @@ class Banner extends Component {
   //  }
   //}
   render() {
-    const { login, user } = this.props;
+    //const { login, user } = this.props;
     return (
       <div className="banner">
         <h2 className="banner-logo">JoshahLine Web Solutions</h2>
         <h2 className="banner-text">
-        {!login?
+        {!this.props.login?
           <Link className="banner-link" to="/login">Login</Link>
         :
-          <label>{ user }</label>
+          <label>{ this.props.user }</label>
         }
         </h2>
       </div>
@@ -32,7 +32,7 @@ class Banner extends Component {
   }
 }
 
-
+/*
 // Same as above, but as a function of props
 //    https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html
 const BannerTwo = ({ login, user }) => (
@@ -47,6 +47,7 @@ const BannerTwo = ({ login, user }) => (
     </h2>
   </div>
 )
+*/
 
 const ConnectedBanner = connect(mapStateToProps)(Banner);
 
