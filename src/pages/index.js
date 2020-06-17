@@ -19,6 +19,8 @@ const mapDispathToProps = dispatch => {
 
 class ConnectedHome extends Component {
   logout() {
+    localStorage.removeItem('j-login');
+    localStorage.removeItem('j-user');
     this.props.userLogout();
   }
   render() {

@@ -22,7 +22,7 @@ class ConnectedProtectedPage extends Component {
           <ConnectedBanner />
           <div className="section">
             <div className="container">
-              <h1 class="title">Protected Route</h1>
+              <h1 className="title">Protected Route</h1>
               <br />
               <Link to="/">Return to Home</Link>
               <br /><br />
