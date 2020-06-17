@@ -8,8 +8,14 @@ const initialState = {
   user: null,
 };
 
+function getInitialState() {
+    //
+    //  Something here to try to retreive state from localStorage
+    //
+    return initialState
+}
 
-function rootReducer(state = initialState, action) {
+function rootReducer(state = getInitialState(), action) {
   // Catch the add article action - remember have to work with IMMUTABLE OBJECTS!!!
   if (action.type === ADD_ARTICLE) {
     return Object.assign({}, state, {
