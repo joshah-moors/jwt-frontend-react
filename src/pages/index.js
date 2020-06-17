@@ -52,7 +52,7 @@ class ConnectedHome extends Component {
         <div className="section">
           <div className="container">
             <p>
-              Descriptive text about this site goes here..
+              React front-end implementing login and API usage with JWT.
             </p>
           </div>
         </div>
