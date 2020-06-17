@@ -65,10 +65,14 @@ class ConnectedLoginPage extends Component {
   login() {
     //alert("Login button pressed");
     const { user } = this.state;
+    localStorage.setItem("j-login", "true");
+    localStorage.setItem("j-user", user);
     this.props.userLogin({ user });
     this.props.history.push('/');
   }
   logout() {
+    localStorage.removeItem('j-login');
+    localStorage.removeItem('j-user');
     this.props.userLogout();
   }
   render() {

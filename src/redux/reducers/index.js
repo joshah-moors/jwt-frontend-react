@@ -8,12 +8,19 @@ const initialState = {
   user: null,
 };
 
+
 function getInitialState() {
-    //
-    //  Something here to try to retreive state from localStorage
-    //
-    return initialState
-}
+    // Try to retrieve state from localStorage
+    if (localStorage.getItem("j-login") === "true" ) {
+      return {
+          login: true,
+          user: localStorage.getItem("j-user")
+        };
+    } else {
+      return initialState;
+    }
+};
+
 
 function rootReducer(state = getInitialState(), action) {
   // Catch the add article action - remember have to work with IMMUTABLE OBJECTS!!!
