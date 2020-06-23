@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { userLogin, userLogout } from '../redux/actions';
 
+// Axios base instance
+import API from '../components/api';
 import Banner from '../components/banner';
 
 
@@ -65,10 +67,11 @@ class ConnectedLoginPage extends Component {
   login() {
     //alert("Login button pressed");
     const { user } = this.state;
-    localStorage.setItem("j-login", "true");
-    localStorage.setItem("j-user", user);
-    this.props.userLogin({ user });
-    this.props.history.push('/');
+    alert(this.state.user + ' ' + this.state.password);
+    //localStorage.setItem("j-login", "true");
+    //localStorage.setItem("j-user", user);
+    //this.props.userLogin({ user });
+    //this.props.history.push('/');
   }
   logout() {
     localStorage.removeItem('j-login');
