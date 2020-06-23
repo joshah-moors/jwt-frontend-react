@@ -67,11 +67,31 @@ class ConnectedLoginPage extends Component {
   login() {
     //alert("Login button pressed");
     const { user } = this.state;
-    alert(this.state.user + ' ' + this.state.password);
     //localStorage.setItem("j-login", "true");
     //localStorage.setItem("j-user", user);
     //this.props.userLogin({ user });
     //this.props.history.push('/');
+    //
+    //alert(this.state.user + ' ' + this.state.password);
+    API.get('/api/v2/media/public', this.state)
+      .then((response) => {
+        //console.warn('response', response);
+        //localStorage.setItem("login", JSON.stringify({
+        //  login: true,
+        //  accessToken: response.data.accessToken,
+        //  refreshToken: response.data.refreshToken,
+        //}))
+        //this.storeCollector();
+        alert(response.status + ' ' + response.data.status+ ' ' + response.data.data);
+      })
+      .catch((error) => {
+        console.warn('error', error);
+        this.setState({
+          // Need to add something that checks return code for error message
+          //loginError: true,
+          //loginErrorMsg: 'Invalid Username/Password',
+        })
+      })
   }
   logout() {
     localStorage.removeItem('j-login');
