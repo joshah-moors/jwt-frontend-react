@@ -65,14 +65,15 @@ class ConnectedLoginPage extends Component {
     }
   }
   login() {
-    //alert("Login button pressed");
     const { user } = this.state;
-    //localStorage.setItem("j-login", "true");
-    //localStorage.setItem("j-user", user);
-    //this.props.userLogin({ user });
-    //this.props.history.push('/');
+    localStorage.setItem("j-login", "true");
+    localStorage.setItem("j-user", user);
+    this.props.userLogin({ user });
+    this.props.history.push('/');
     //
     //alert(this.state.user + ' ' + this.state.password);
+
+    /*
     API.get('/api/v2/media/public', this.state)
       .then((response) => {
         //console.warn('response', response);
@@ -92,6 +93,7 @@ class ConnectedLoginPage extends Component {
           //loginErrorMsg: 'Invalid Username/Password',
         })
       })
+    */
   }
   logout() {
     localStorage.removeItem('j-login');
